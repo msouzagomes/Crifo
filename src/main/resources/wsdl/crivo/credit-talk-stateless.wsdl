@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://tempuri.org/WCCrivo"
+                  xmlns:s1="www.crivo.com.br"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  targetNamespace="http://tempuri.org/WCCrivo"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/WCCrivo">
+      <s:import namespace="www.crivo.com.br" />
+      <s:element name="Report">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDriver" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProduto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Explain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExplainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExplainResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPDF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPDFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadPDFResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Values">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValuesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Layout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LayoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LayoutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Parameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ParametersResult" type="tns:ArrayOfParametro" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfParametro">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Parametro" nillable="true" type="tns:Parametro" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Parametro">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Valor" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RawData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sDriver" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sProduto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RawDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RawDataResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Sources">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SourcesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SourcesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadLogResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalOutputParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCriterio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalOutputParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPolicyEvalOutputParametersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesExplainOutputParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sCriterio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesExplainOutputParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPolicyEvalValuesExplainOutputParametersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvalOutputParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvalOutputParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EvalOutputParametersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvalValuesExplainOutputParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvalValuesExplainOutputParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EvalValuesExplainOutputParametersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLogOutputParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLogOutputParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadLogOutputParametersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLogValuesExplainOutputParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sOperacao" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadLogValuesExplainOutputParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadLogValuesExplainOutputParametersResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Eval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EvalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEval">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPolitica" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPolicyEvalResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValues">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPolitica" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPolicyEvalValuesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPolitica" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPolicyEvalValuesXmlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesObjectXml">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sPolitica" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sParametros" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPolicyEvalValuesObjectXmlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" ref="s1:ResultadoXml" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="www.crivo.com.br">
+      <s:element name="ResultadoXml" nillable="true" type="s1:ResultEvalValuesXml" />
+      <s:complexType name="ResultEvalValuesXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoOperacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperacoesObjetoAnalise" type="s1:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Respostas" type="s1:ArrayOfResultRespostasXml" />
+          <s:element minOccurs="0" maxOccurs="1" name="Drivers" type="s1:ArrayOfResultDriverXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CodigoOperacao" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfResultRespostasXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Resposta" nillable="true" type="s1:ResultRespostasXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResultRespostasXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Sistema" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Criterio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Resposta" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Final" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfResultDriverXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Driver" nillable="true" type="s1:ResultDriverXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResultDriverXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Produtos" type="s1:ArrayOfResultProdutoXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfResultProdutoXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Produto" nillable="true" type="s1:ResultProdutoXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResultProdutoXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Variaveis" type="s1:ArrayOfResultVariavelXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfResultVariavelXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Variavel" nillable="true" type="s1:ResultVariavelXml" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResultVariavelXml">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Valor" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ReportSoapIn">
+    <wsdl:part name="parameters" element="tns:Report" />
+  </wsdl:message>
+  <wsdl:message name="ReportSoapOut">
+    <wsdl:part name="parameters" element="tns:ReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExplainSoapIn">
+    <wsdl:part name="parameters" element="tns:Explain" />
+  </wsdl:message>
+  <wsdl:message name="ExplainSoapOut">
+    <wsdl:part name="parameters" element="tns:ExplainResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadPDFSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadPDF" />
+  </wsdl:message>
+  <wsdl:message name="LoadPDFSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadPDFResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:Values" />
+  </wsdl:message>
+  <wsdl:message name="ValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:ValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="LayoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Layout" />
+  </wsdl:message>
+  <wsdl:message name="LayoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LayoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="ParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:Parameters" />
+  </wsdl:message>
+  <wsdl:message name="ParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:ParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="RawDataSoapIn">
+    <wsdl:part name="parameters" element="tns:RawData" />
+  </wsdl:message>
+  <wsdl:message name="RawDataSoapOut">
+    <wsdl:part name="parameters" element="tns:RawDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="SourcesSoapIn">
+    <wsdl:part name="parameters" element="tns:Sources" />
+  </wsdl:message>
+  <wsdl:message name="SourcesSoapOut">
+    <wsdl:part name="parameters" element="tns:SourcesResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadLogSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadLog" />
+  </wsdl:message>
+  <wsdl:message name="LoadLogSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalOutputParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalOutputParameters" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalOutputParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalOutputParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesExplainOutputParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesExplainOutputParameters" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesExplainOutputParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesExplainOutputParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="EvalOutputParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:EvalOutputParameters" />
+  </wsdl:message>
+  <wsdl:message name="EvalOutputParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:EvalOutputParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="EvalValuesExplainOutputParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:EvalValuesExplainOutputParameters" />
+  </wsdl:message>
+  <wsdl:message name="EvalValuesExplainOutputParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:EvalValuesExplainOutputParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadLogOutputParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadLogOutputParameters" />
+  </wsdl:message>
+  <wsdl:message name="LoadLogOutputParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadLogOutputParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadLogValuesExplainOutputParametersSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadLogValuesExplainOutputParameters" />
+  </wsdl:message>
+  <wsdl:message name="LoadLogValuesExplainOutputParametersSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadLogValuesExplainOutputParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="EvalSoapIn">
+    <wsdl:part name="parameters" element="tns:Eval" />
+  </wsdl:message>
+  <wsdl:message name="EvalSoapOut">
+    <wsdl:part name="parameters" element="tns:EvalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPolicyEval" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValues" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesXml" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesObjectXmlSoapIn">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesObjectXml" />
+  </wsdl:message>
+  <wsdl:message name="SetPolicyEvalValuesObjectXmlSoapOut">
+    <wsdl:part name="parameters" element="tns:SetPolicyEvalValuesObjectXmlResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CreditTalkStatelessSoap">
+    <wsdl:operation name="Report">
+      <wsdl:input message="tns:ReportSoapIn" />
+      <wsdl:output message="tns:ReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Explain">
+      <wsdl:input message="tns:ExplainSoapIn" />
+      <wsdl:output message="tns:ExplainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPDF">
+      <wsdl:input message="tns:LoadPDFSoapIn" />
+      <wsdl:output message="tns:LoadPDFSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Values">
+      <wsdl:input message="tns:ValuesSoapIn" />
+      <wsdl:output message="tns:ValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Layout">
+      <wsdl:input message="tns:LayoutSoapIn" />
+      <wsdl:output message="tns:LayoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Parameters">
+      <wsdl:input message="tns:ParametersSoapIn" />
+      <wsdl:output message="tns:ParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RawData">
+      <wsdl:input message="tns:RawDataSoapIn" />
+      <wsdl:output message="tns:RawDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Sources">
+      <wsdl:input message="tns:SourcesSoapIn" />
+      <wsdl:output message="tns:SourcesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadLog">
+      <wsdl:input message="tns:LoadLogSoapIn" />
+      <wsdl:output message="tns:LoadLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalOutputParameters">
+      <wsdl:input message="tns:SetPolicyEvalOutputParametersSoapIn" />
+      <wsdl:output message="tns:SetPolicyEvalOutputParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesExplainOutputParameters">
+      <wsdl:input message="tns:SetPolicyEvalValuesExplainOutputParametersSoapIn" />
+      <wsdl:output message="tns:SetPolicyEvalValuesExplainOutputParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EvalOutputParameters">
+      <wsdl:input message="tns:EvalOutputParametersSoapIn" />
+      <wsdl:output message="tns:EvalOutputParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EvalValuesExplainOutputParameters">
+      <wsdl:input message="tns:EvalValuesExplainOutputParametersSoapIn" />
+      <wsdl:output message="tns:EvalValuesExplainOutputParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadLogOutputParameters">
+      <wsdl:input message="tns:LoadLogOutputParametersSoapIn" />
+      <wsdl:output message="tns:LoadLogOutputParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadLogValuesExplainOutputParameters">
+      <wsdl:input message="tns:LoadLogValuesExplainOutputParametersSoapIn" />
+      <wsdl:output message="tns:LoadLogValuesExplainOutputParametersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Eval">
+      <wsdl:input message="tns:EvalSoapIn" />
+      <wsdl:output message="tns:EvalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEval">
+      <wsdl:input message="tns:SetPolicyEvalSoapIn" />
+      <wsdl:output message="tns:SetPolicyEvalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValues">
+      <wsdl:input message="tns:SetPolicyEvalValuesSoapIn" />
+      <wsdl:output message="tns:SetPolicyEvalValuesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesXml">
+      <wsdl:input message="tns:SetPolicyEvalValuesXmlSoapIn" />
+      <wsdl:output message="tns:SetPolicyEvalValuesXmlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesObjectXml">
+      <wsdl:input message="tns:SetPolicyEvalValuesObjectXmlSoapIn" />
+      <wsdl:output message="tns:SetPolicyEvalValuesObjectXmlSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreditTalkStatelessSoap" type="tns:CreditTalkStatelessSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Report">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Report" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Explain">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Explain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPDF">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/LoadPDF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Values">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Values" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Layout">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Layout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Parameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Parameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RawData">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/RawData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sources">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Sources" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLog">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/LoadLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalOutputParameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalOutputParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesExplainOutputParameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValuesExplainOutputParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EvalOutputParameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/EvalOutputParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EvalValuesExplainOutputParameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/EvalValuesExplainOutputParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLogOutputParameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/LoadLogOutputParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLogValuesExplainOutputParameters">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/LoadLogValuesExplainOutputParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Eval">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/Eval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEval">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEval" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValues">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValues" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesXml">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValuesXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesObjectXml">
+      <soap:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValuesObjectXml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CreditTalkStatelessSoap12" type="tns:CreditTalkStatelessSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Report">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Report" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Explain">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Explain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPDF">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/LoadPDF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Values">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Values" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Layout">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Layout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Parameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Parameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RawData">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/RawData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sources">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Sources" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLog">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/LoadLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalOutputParameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalOutputParameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesExplainOutputParameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValuesExplainOutputParameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EvalOutputParameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/EvalOutputParameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EvalValuesExplainOutputParameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/EvalValuesExplainOutputParameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLogOutputParameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/LoadLogOutputParameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadLogValuesExplainOutputParameters">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/LoadLogValuesExplainOutputParameters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Eval">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/Eval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEval">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEval" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValues">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValues" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesXml">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValuesXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPolicyEvalValuesObjectXml">
+      <soap12:operation soapAction="http://tempuri.org/WCCrivo/SetPolicyEvalValuesObjectXml" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreditTalkStateless">
+    <wsdl:port name="CreditTalkStatelessSoap" binding="tns:CreditTalkStatelessSoap">
+      <soap:address location="https://calcardh.crivo.com.br/ws/CreditTalkStateless.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CreditTalkStatelessSoap12" binding="tns:CreditTalkStatelessSoap12">
+      <soap12:address location="https://calcardh.crivo.com.br/ws/CreditTalkStateless.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

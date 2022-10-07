@@ -1,0 +1,60 @@
+### GENERAL ###
+server:
+  port: 8080
+
+### INTEGRATION ###
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+
+### CIRCUITBREAKER ###
+resilience4j.circuitbreaker:
+  instances:
+    CrivoClient:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 1
+      slidingWindowType: COUNT_BASED #TIME_BASED
+      minimumNumberOfCalls: 2
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      #recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+
+resilience4j.retry:
+  instances:
+    CrivoClient:
+      maxAttempts: 2
+      waitDuration: 2s
+      #enableExponentialBackoff: true
+      #exponentialBackoffMultiplier: 2
+      #retryExceptions:
+      #   - org.springframework.web.client.HttpServerErrorException
+      #  - java.io.IOException
+      # ignoreExceptions:
+      #  - io.github.robwin.exception.BusinessException
+
+api:
+  path:
+    crivo:
+      urlService: https://calcardh.crivo.com.br/ws/CreditTalkStateless.asmx?WSDL
+      namespace: http://tempuri.org/WCCrivo
+      user: if_teste
+      password: 1234@qwe
+
+spring:
+  ### SLEUTH ###
+  sleuth:
+    baggage:
+      remote-fields:
+        - X-CCRED-TRANSACTIONAL-ID
+
+springdoc:
+  swagger-ui:
+    path: /docs
+    operationsSorter: method
+    disable-swagger-default-url: true
+  api-docs:
+    path: /api-docs

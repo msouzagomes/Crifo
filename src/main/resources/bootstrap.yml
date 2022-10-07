@@ -1,0 +1,56 @@
+### GENERAL ###
+server:
+  servlet.context-path: /crivo/api
+  compression.enabled: true
+  error.include-message: always
+### MONITORING ###
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints.web.exposure.include: metrics,prometheus,health,circuitbreakers,circuitbreakerevents
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+spring:
+  profiles:
+    active: local
+  application.name: crivo-api
+  cloud.config.fail-fast: true
+  main.web-application-type: SERVLET
+  jackson:
+    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization.fail-on-unknown-properties: false
+    default-property-inclusion: NON_ABSENT
+### LOCALE ###
+  mvc:
+    locale: pt_BR
+    localeResolver: fixed
+### INTEGRATION ###
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 30000
+        readTimeout: 30000
+        loggerLevel: basic
+api:
+  egress:
+
+---
+### PROFILE ###
+spring:
+  profiles:
+    - local
+  cloud.config.enabled: false
+---
+spring:
+  profiles:
+    - dev
+    - qa
+    - prd
+  cloud:
+    config:
+      uri: http://config-server-calcred.x-config:8888

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+<!--    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr([ %X{CCRED-TRANSACTIONAL-ID} ]){faint}   %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+            </Pattern>
+        </layout>
+    </appender>
+
+    <springProfile name="prd,qa,dev">
+        <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
+            <graylogHost>logstash.elk</graylogHost>
+            <graylogPort>12201</graylogPort>
+            <useCompression>true</useCompression>
+            <encoder class="de.siegmar.logbackgelf.GelfEncoder">
+                <includeMarker>true</includeMarker>
+                <includeMdcData>true</includeMdcData>
+                <includeCallerData>true</includeCallerData>
+                <includeLevelName>true</includeLevelName>
+                <shortPatternLayout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>%ex{short}%.100m</pattern>
+                </shortPatternLayout>
+                <fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+                </fullPatternLayout>
+                <staticField>app_name:crivo-api</staticField>
+                <staticField>app_profile:${SPRING_PROFILES_ACTIVE}</staticField>
+                <staticField>os_arch:${os.arch}</staticField>
+                <staticField>os_name:${os.name}</staticField>
+                <staticField>os_version:${os.version}</staticField>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="local">
+        <logger name="org.springframework" additivity="false" level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="org.springframework.data" additivity="false" level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="br.com.calcred.api" additivity="false" level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <root level="WARN" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="qa,dev">
+        <logger name="org.springframework" additivity="false" level="WARN">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="org.springframework.data" additivity="false" level="INFO">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="br.com.calcred.api" additivity="false" level="DEBUG">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <root level="INFO" additivity="false">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prd">
+        <logger name="org.springframework.data" additivity="false" level="WARN">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="br.com.calcred.api" additivity="false" level="DEBUG">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+
+        <root level="ERROR" additivity="false">
+            <appender-ref ref="GELF"/>
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+</configuration>
