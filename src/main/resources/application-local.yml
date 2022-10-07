@@ -39,10 +39,10 @@ resilience4j.retry:
 api:
   path:
     crivo:
-      urlService: https://calcardh.crivo.com.br/ws/CreditTalkStateless.asmx?WSDL
+      urlService: 
       namespace: http://tempuri.org/WCCrivo
       user: if_teste
-      password: 1234@qwe
+      password: 
 
 spring:
   ### SLEUTH ###
